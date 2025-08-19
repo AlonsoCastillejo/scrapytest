@@ -11,9 +11,27 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent
 sys.path.insert(0, str(project_root / "src"))
 
-from habitaclia.scraper.core import HabitacliaMultiCityScraper
-from habitaclia.config.cities import SPANISH_CITIES, CITY_GROUPS
-from habitaclia.data.validator import PropertyDataValidator
+try:
+    from habitaclia.scraper.core import HabitacliaMultiCityScraper
+    from habitaclia.config.cities import SPANISH_CITIES, CITY_GROUPS
+except ImportError:
+    # Fallback si la estructura modular no está completa
+    print("⚠️  Estructura modular no encontrada, usando import directo...")
+    sys.path.insert(0, str(project_root))
+    from src.habitaclia.scraper.core import HabitacliaMultiCityScraper
+    
+    # Definir ciudades directamente si no existe el módulo
+    SPANISH_CITIES = {
+        'barcelona': 'Barcelona', 'madrid': 'Madrid', 'valencia': 'Valencia',
+        'sevilla': 'Sevilla', 'bilbao': 'Bilbao', 'malaga': 'Málaga',
+        'zaragoza': 'Zaragoza', 'murcia': 'Murcia', 'palma': 'Palma de Mallorca'
+    }
+    
+    CITY_GROUPS = {
+        'tier1': ['barcelona', 'madrid', 'valencia', 'sevilla'],
+        'tier2': ['bilbao', 'malaga', 'zaragoza', 'murcia', 'palma'],
+        'all_main': ['barcelona', 'madrid', 'valencia', 'sevilla', 'bilbao', 'malaga', 'zaragoza']
+    }
 
 def parse_arguments():
     """Configura y parsea argumentos de línea de comandos"""
@@ -171,68 +189,86 @@ def main():
     
     # Ejecutar scraping
     try:
-        with HabitacliaMultiCityScraper(config) as scraper:
-            # Scrapear datos
-            properties_data = scraper.scrape_multiple_cities(
-                cities=cities,
-                property_type=args.type,
-                max_pages=args.pages
-            )
+        # ✅ Crear scraper con configuración (sin 'with')
+        scraper = HabitacliaMultiCityScraper(config)
+        
+        # Scrapear datos
+        properties_data = scraper.scrape_multiple_cities(
+            cities=cities,
+            property_type=args.type,
+            max_pages=args.pages
+        )
+        
+        if not properties_data:
+            print("❌ No se obtuvieron datos")
+            return
+        
+        print(f"\n✅ Scraping completado: {len(properties_data)} propiedades")
+        
+        # Validación de datos (comentada hasta implementar)
+        if args.validate:
+            print("\n🔍 Validando calidad de datos...")
+            print("⚠️  Validación no implementada aún - será añadida en próxima versión")
             
-            if not properties_data:
-                print("❌ No se obtuvieron datos")
-                return
-            
-            print(f"\n✅ Scraping completado: {len(properties_data)} propiedades")
-            
-            # Validación de datos
-            if args.validate:
-                print("\n🔍 Validando calidad de datos...")
-                validator = PropertyDataValidator()
-                validation_report = validator.validate_dataset(properties_data)
-                
-                print(f"📊 Reporte de validación:")
-                print(f"   Propiedades válidas: {validation_report['valid_properties']}/{validation_report['total_properties']} ({validation_report['validity_rate']}%)")
-                print(f"   URLs duplicadas: {validation_report['duplicate_urls']}")
-                
-                print("\n💡 Recomendaciones:")
-                for rec in validation_report['recommendations']:
-                    print(f"   {rec}")
-                
-                # Limpieza automática si se solicita
-                if args.clean and validation_report['validity_rate'] < 90:
-                    print("\n🧹 Limpiando datos...")
-                    properties_data, cleaning_report = validator.clean_dataset(properties_data)
-                    print(f"   Eliminados: {cleaning_report['duplicates_removed']} duplicados, {cleaning_report['invalid_removed']} inválidos")
-                    print(f"   Datos finales: {len(properties_data)} propiedades")
-            
-            # Guardar datos
-            print("\n💾 Guardando datos...")
-            if args.output:
-                csv_filename = args.output if args.output.endswith('.csv') else f"{args.output}.csv"
-                json_filename = args.output.replace('.csv', '.json') if args.output.endswith('.csv') else f"{args.output}.json"
-                scraper.save_data(csv_filename, json_filename)
+            # TODO: Implementar cuando esté disponible
+            # try:
+            #     from habitaclia.data.validator import PropertyDataValidator
+            #     validator = PropertyDataValidator()
+            #     validation_report = validator.validate_dataset(properties_data)
+            #     print(f"📊 Propiedades válidas: {validation_report['valid_properties']}")
+            # except ImportError:
+            #     print("⚠️  Módulo de validación no disponible")
+        
+        # ✅ Guardar datos usando métodos correctos
+        print("\n💾 Guardando datos...")
+        if args.output:
+            # Preparar nombres de archivo
+            if args.output.endswith('.csv'):
+                csv_filename = args.output
+                json_filename = args.output.replace('.csv', '.json')
             else:
-                scraper.save_data()
+                csv_filename = f"{args.output}.csv"
+                json_filename = f"{args.output}.json"
             
-            # Estadísticas finales
-            if args.verbose:
-                print("\n📈 Estadísticas finales:")
-                stats = scraper.get_statistics()
+            # Guardar con nombres específicos
+            scraper.save_to_csv(csv_filename)
+            scraper.save_to_json(json_filename)
+            print(f"📁 Archivos guardados: {csv_filename}, {json_filename}")
+        else:
+            # Guardar con nombres automáticos basados en timestamp
+            scraper.save_to_csv()
+            scraper.save_to_json()
+        
+        # Estadísticas finales
+        if args.verbose:
+            print("\n📈 Estadísticas finales:")
+            stats = scraper.get_statistics()
+            
+            if 'error' not in stats:
                 print(f"   Total propiedades: {stats['total_properties']}")
                 print(f"   Ciudades scrapeadas: {stats['cities_scraped']}")
                 
+                # Estadísticas de precios
                 if 'price_stats' in stats:
                     price_stats = stats['price_stats']
                     print(f"   Precio promedio: {price_stats['avg_price']:.2f}€")
-                    print(f"   Rango de precios: {price_stats['min_price']:.0f}€ - {price_stats['max_price']:.0f}€")
+                    print(f"   Rango: {price_stats['min_price']:.0f}€ - {price_stats['max_price']:.0f}€")
+                    print(f"   Propiedades con precio: {price_stats['properties_with_price']}")
                 
-                print("\n🏙️  Propiedades por ciudad:")
+                # Estadísticas de área
+                if 'area_stats' in stats:
+                    area_stats = stats['area_stats']
+                    print(f"   Área promedio: {area_stats['avg_area']:.1f}m²")
+                    print(f"   Propiedades con área: {area_stats['properties_with_area']}")
+                
+                print(f"\n🏙️  Propiedades por ciudad:")
                 for city, count in stats['properties_by_city'].items():
                     print(f"     {city}: {count}")
-            
-            print("\n🎉 ¡Proceso completado exitosamente!")
-            
+            else:
+                print(f"   ❌ {stats['error']}")
+        
+        print("\n🎉 ¡Proceso completado exitosamente!")
+        
     except KeyboardInterrupt:
         print("\n⚠️  Proceso interrumpido por el usuario")
     except Exception as e:
