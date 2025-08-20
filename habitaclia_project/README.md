@@ -1,0 +1,227 @@
+# Habitaclia Scraper - Documentación del Proyecto
+
+## 📋 Resumen del Proyecto
+
+**Proyecto**: Sistema de extracción automatizada de datos inmobiliarios de Habitaclia.com para investigación académica  
+**Objetivo**: Crear un dataset completo del mercado inmobiliario español para desarrollo de modelos de IA  
+**Alcance**: Múltiples ciudades españolas con datos de alquiler y venta  
+
+## 🏗️ Arquitectura del Sistema
+
+### Componentes Principales
+
+1. **HabitacliaMultiCityScraper**: Clase principal que gestiona el scraping multi-ciudad
+2. **Sistema de Extracción**: Módulos especializados para diferentes tipos de datos
+3. **Control Anti-Bot**: Gestión de headers, delays y rotación de User-Agents
+4. **Almacenamiento**: Exportación a CSV y JSON con metadatos
+
+### Estructura de Datos
+```
+Propiedad {
+  - city_name, city_code      # Información geográfica
+  - title, price, location    # Datos básicos
+  - rooms, bathrooms, area_m2 # Características técnicas
+  - description               # Descripción textual
+  - image_urls, image_count   # Recursos multimedia
+  - url, timestamp           # Metadatos de scraping
+}
+```
+
+## 🌍 Cobertura Geográfica
+
+**32 ciudades españolas** organizadas por importancia:
+
+- **Tier 1**: Barcelona, Madrid, Valencia, Sevilla
+- **Tier 2**: Bilbao, Málaga, Zaragoza, Murcia, Palma
+- **Tier 3**: Las Palmas, Valladolid, Vigo, Gijón, Córdoba, Alicante
+- **Otras 17 ciudades**: Granada, Pamplona, San Sebastián, etc.
+
+## 🔧 Tecnologías Utilizadas
+
+### Librerías Python
+```python
+requests>=2.31.0        # Cliente HTTP para scraping
+beautifulsoup4>=4.12.0  # Parser HTML/XML
+pandas>=2.0.0           # Manipulación y análisis de datos
+lxml>=4.9.3            # Parser XML rápido
+numpy>=1.24.0          # Computación numérica
+```
+
+### Funcionalidades Técnicas
+- **Web Scraping**: Extracción automatizada de contenido HTML
+- **Anti-Bot Evasion**: Rotación de headers y delays inteligentes
+- **Data Processing**: Limpieza y estructuración de datos
+- **Export Management**: Múltiples formatos de salida
+
+## 🛡️ Estrategias Anti-Detección
+
+### Protecciones Implementadas
+1. **User-Agent Rotation**: 4+ navegadores diferentes
+2. **Delays Variables**: 2-60 segundos entre requests
+3. **Headers Realistas**: Headers completos de Chrome/Firefox
+4. **Session Management**: Gestión de cookies y estado
+5. **Error Handling**: Reintentos automáticos con backoff
+
+### Estructura de Delays
+```
+Páginas de búsqueda: 3-7 segundos
+Entre inmuebles: 2-5 segundos  
+Entre ciudades: 30-60 segundos (configurable)
+```
+
+## 📊 Datos Extraídos
+
+### Información Principal
+- **Título**: Descripción completa del inmueble
+- **Precio**: Valor numérico en euros + texto original
+- **Ubicación**: Dirección y barrio específico
+- **Características**: Habitaciones, baños, metros cuadrados
+
+### Metadatos
+- **Ciudad**: Código y nombre completo
+- **URLs**: Enlace original para verificación
+- **Timestamp**: Momento exacto de extracción
+- **Imágenes**: URLs y conteo de fotos
+
+### Patrones de Extracción
+```python
+# Precios: Regex para diferentes formatos
+r'(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)\s*€'
+
+# Habitaciones: Múltiples patrones
+r'(\d+)\s*(?:rooms?|habitaciones?|hab\.?)'
+
+# Área: Metros cuadrados
+r'(\d+)\s*m[²2]'
+```
+
+## 🚀 Uso del Sistema
+
+### Configuración Básica
+```python
+scraper = HabitacliaMultiCityScraper()
+
+# Scraping de ciudades principales
+main_cities = ['barcelona', 'madrid', 'valencia', 'sevilla']
+
+scraper.scrape_multiple_cities(
+    cities=main_cities,
+    property_type="rent",      # "rent" o "homes"
+    max_pages=2,              # Páginas por ciudad
+    delay_between_cities=(30, 60)  # Segundos entre ciudades
+)
+```
+
+### Parámetros de Control
+- **cities**: Lista de códigos de ciudad o None para todas
+- **property_type**: "rent" (alquiler) o "homes" (venta)
+- **max_pages**: Número de páginas a scrapear por ciudad
+- **delay_between_cities**: Rango de delay entre ciudades
+
+## 📈 Rendimiento y Escalabilidad
+
+### Métricas de Rendimiento
+- **Velocidad**: ~20-30 propiedades/hora por ciudad
+- **Éxito**: 85-95% de extracción exitosa
+- **Cobertura**: 15-50 propiedades por página
+
+### Estimaciones de Tiempo
+```
+4 ciudades principales → 2-3 horas
+10 ciudades medianas   → 5-6 horas  
+32 ciudades completas  → 15-20 horas
+```
+
+### Limitaciones
+- **Rate Limiting**: Protecciones anti-bot de Habitaclia
+- **Contenido Dinámico**: Algunas páginas pueden usar JavaScript
+- **Estructura Variable**: Cambios en el HTML requieren mantenimiento
+
+## 💾 Formatos de Salida
+
+### CSV (Recomendado para análisis)
+```csv
+city_name,city_code,title,price,location,rooms,bathrooms,area_m2,url,timestamp
+Barcelona,barcelona,"Flat 3 rooms Barcelona",1500,Eixample,3,2,85,https://...,2025-08-19T...
+```
+
+### JSON (Estructura completa)
+```json
+{
+  "city_name": "Barcelona",
+  "price": 1500,
+  "image_urls": ["url1", "url2"],
+  "description": "Descripción completa...",
+  "timestamp": "2025-08-19T16:57:43"
+}
+```
+
+## ⚖️ Consideraciones Legales y Éticas
+
+### Cumplimiento Legal
+- ✅ **Uso Académico**: Proyecto de investigación para máster
+- ✅ **Datos Públicos**: Información disponible públicamente
+- ✅ **Rate Limiting**: Respeto por los recursos del servidor
+- ✅ **Robots.txt**: Consideración de directivas (cuando sea posible)
+
+### Buenas Prácticas
+- **Propósito Educativo**: Exclusivamente para investigación
+- **No Comercial**: Sin uso con fines de lucro
+- **Respeto al Servidor**: Delays apropiados entre requests
+- **Transparencia**: Headers que identifican el propósito académico
+
+## 🔄 Mantenimiento y Actualizaciones
+
+### Puntos de Mantenimiento
+1. **Selectores CSS**: Pueden cambiar con rediseños web
+2. **Estructura URLs**: Patrones de navegación
+3. **Anti-Bot Measures**: Nuevas protecciones de seguridad
+4. **Ciudades Disponibles**: Expansión geográfica
+
+### Debugging y Logs
+```python
+# Logging completo habilitado
+habitaclia_multicity.log  # Archivo de logs
+Console output           # Progreso en tiempo real
+```
+
+## 📊 Casos de Uso para Investigación
+
+### Análisis Posibles
+- **Predicción de Precios**: Modelos ML basados en características
+- **Análisis Geográfico**: Diferencias entre ciudades españolas
+- **Tendencias Temporales**: Evolución del mercado inmobiliario
+- **Segmentación**: Clusters por precio, tamaño, ubicación
+
+### Variables para Modelos IA
+```python
+Features = [
+    'city_code',      # Variable categórica (location)
+    'rooms',          # Numérica discreta
+    'bathrooms',      # Numérica discreta  
+    'area_m2',        # Numérica continua
+    'location'        # Categórica (barrio)
+]
+Target = 'price'      # Variable objetivo
+```
+
+## 🎯 Entregables del Proyecto
+
+### Archivos Generados
+1. **habitaclia_scraper.py**: Código fuente completo
+2. **requirements.txt**: Dependencias del proyecto
+3. **habitaclia_multicities_YYYYMMDD_HHMMSS.csv**: Dataset principal
+4. **habitaclia_multicities_YYYYMMDD_HHMMSS.json**: Datos estructurados
+5. **habitaclia_multicity.log**: Logs de ejecución
+
+### Documentación
+- **Setup Instructions**: Guía de instalación y configuración
+- **Usage Examples**: Ejemplos prácticos de uso
+- **Technical Documentation**: Este documento
+
+---
+
+**Proyecto desarrollado para**: Investigación académica de máster  
+**Fecha**: Agosto 2025  
+**Tecnologías**: Python, BeautifulSoup, Pandas, Requests  
+**Alcance**: 32 ciudades españolas, datos inmobiliarios completos

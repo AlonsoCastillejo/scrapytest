@@ -1,0 +1,2 @@
+[console_scripts]
+habitaclia-scraper = scripts.run_scraper:main
