@@ -49,3 +49,120 @@
 2025-08-19 19:56:45,867 - INFO - 📊 Barcelona: 19 propiedades únicas encontradas
 2025-08-19 19:56:50,411 - INFO - 📈 Barcelona: 1/19 procesadas
 2025-08-19 19:57:07,878 - INFO - 📈 Barcelona: 6/19 procesadas
+2025-08-20 20:36:48,799 - INFO - 🚀 Iniciando scraping multi-ciudad
+2025-08-20 20:36:48,799 - INFO - 🏙️  Ciudades: ['Barcelona', 'Madrid', 'Valencia']
+2025-08-20 20:36:48,799 - INFO - 🏠 Tipo: homes
+2025-08-20 20:36:48,799 - INFO - 📄 Páginas por ciudad: 7
+2025-08-20 20:36:48,799 - INFO - 🏙️  Iniciando scraping de Barcelona (barcelona)
+2025-08-20 20:36:51,208 - INFO - 🔗 Barcelona: 17 enlaces encontrados
+2025-08-20 20:36:56,647 - INFO - 🔗 Barcelona: 18 enlaces encontrados
+2025-08-20 20:37:04,819 - INFO - 🔗 Barcelona: 17 enlaces encontrados
+2025-08-20 20:37:12,609 - INFO - 🔗 Barcelona: 17 enlaces encontrados
+2025-08-20 20:37:19,046 - INFO - 🔗 Barcelona: 18 enlaces encontrados
+2025-08-20 20:37:24,177 - INFO - 🔗 Barcelona: 18 enlaces encontrados
+2025-08-20 20:37:31,446 - INFO - 🔗 Barcelona: 17 enlaces encontrados
+2025-08-20 20:37:33,928 - INFO - 📊 Barcelona: 114 propiedades únicas encontradas
+2025-08-20 20:37:35,762 - INFO - 📈 Barcelona: 1/114 procesadas
+2025-08-20 20:37:46,286 - INFO - 📈 Barcelona: 6/114 procesadas
+2025-08-20 20:37:55,941 - INFO - 📈 Barcelona: 11/114 procesadas
+2025-08-20 20:38:06,504 - INFO - 📈 Barcelona: 16/114 procesadas
+2025-08-20 20:38:16,578 - INFO - 📈 Barcelona: 21/114 procesadas
+2025-08-20 20:38:27,259 - INFO - 📈 Barcelona: 26/114 procesadas
+2025-08-20 20:38:37,573 - INFO - 📈 Barcelona: 31/114 procesadas
+2025-08-20 20:38:48,596 - INFO - 📈 Barcelona: 36/114 procesadas
+2025-08-20 20:38:58,625 - INFO - 📈 Barcelona: 41/114 procesadas
+2025-08-20 20:39:10,012 - INFO - 📈 Barcelona: 46/114 procesadas
+2025-08-20 20:39:20,963 - INFO - 📈 Barcelona: 51/114 procesadas
+2025-08-20 20:39:30,846 - INFO - 📈 Barcelona: 56/114 procesadas
+2025-08-20 20:39:40,295 - INFO - 📈 Barcelona: 61/114 procesadas
+2025-08-20 20:39:50,525 - INFO - 📈 Barcelona: 66/114 procesadas
+2025-08-20 20:40:00,591 - INFO - 📈 Barcelona: 71/114 procesadas
+2025-08-20 20:40:10,324 - INFO - 📈 Barcelona: 76/114 procesadas
+2025-08-20 20:40:20,555 - INFO - 📈 Barcelona: 81/114 procesadas
+2025-08-20 20:40:31,135 - INFO - 📈 Barcelona: 86/114 procesadas
+2025-08-20 20:40:42,567 - INFO - 📈 Barcelona: 91/114 procesadas
+2025-08-20 20:40:53,622 - INFO - 📈 Barcelona: 96/114 procesadas
+2025-08-20 20:41:05,103 - INFO - 📈 Barcelona: 101/114 procesadas
+2025-08-20 20:41:15,840 - INFO - 📈 Barcelona: 106/114 procesadas
+2025-08-20 20:41:26,094 - INFO - 📈 Barcelona: 111/114 procesadas
+2025-08-20 20:41:31,347 - INFO - ✅ Barcelona completada: 114 propiedades extraídas
+2025-08-20 20:41:31,348 - INFO - 🎯 Total acumulado: 114 propiedades
+2025-08-20 20:41:31,348 - INFO - ⏳ Esperando 14s antes de Madrid...
+2025-08-20 20:41:45,642 - INFO - 🏙️  Iniciando scraping de Madrid (madrid)
+2025-08-20 20:41:48,809 - INFO - 🔗 Madrid: 18 enlaces encontrados
+2025-08-20 20:41:55,509 - INFO - 🔗 Madrid: 18 enlaces encontrados
+2025-08-20 20:42:01,197 - INFO - 🔗 Madrid: 18 enlaces encontrados
+2025-08-20 20:42:07,069 - INFO - 🔗 Madrid: 17 enlaces encontrados
+2025-08-20 20:42:12,362 - INFO - 🔗 Madrid: 17 enlaces encontrados
+2025-08-20 20:42:16,929 - INFO - 🔗 Madrid: 18 enlaces encontrados
+2025-08-20 20:42:22,700 - INFO - 🔗 Madrid: 17 enlaces encontrados
+2025-08-20 20:42:26,357 - INFO - 📊 Madrid: 114 propiedades únicas encontradas
+2025-08-20 20:42:28,339 - INFO - 📈 Madrid: 1/114 procesadas
+2025-08-20 20:42:38,195 - INFO - 📈 Madrid: 6/114 procesadas
+2025-08-20 20:42:48,306 - INFO - 📈 Madrid: 11/114 procesadas
+2025-08-20 20:42:58,447 - INFO - 📈 Madrid: 16/114 procesadas
+2025-08-20 20:43:10,003 - INFO - 📈 Madrid: 21/114 procesadas
+2025-08-20 20:43:21,615 - INFO - 📈 Madrid: 26/114 procesadas
+2025-08-20 20:43:31,721 - INFO - 📈 Madrid: 31/114 procesadas
+2025-08-20 20:43:40,601 - INFO - 📈 Madrid: 36/114 procesadas
+2025-08-20 20:43:51,172 - INFO - 📈 Madrid: 41/114 procesadas
+2025-08-20 20:44:00,308 - INFO - 📈 Madrid: 46/114 procesadas
+2025-08-20 20:44:11,291 - INFO - 📈 Madrid: 51/114 procesadas
+2025-08-20 20:44:22,357 - INFO - 📈 Madrid: 56/114 procesadas
+2025-08-20 20:44:31,404 - INFO - 📈 Madrid: 61/114 procesadas
+2025-08-20 20:44:41,711 - INFO - 📈 Madrid: 66/114 procesadas
+2025-08-20 20:44:52,874 - INFO - 📈 Madrid: 71/114 procesadas
+2025-08-20 20:45:02,913 - INFO - 📈 Madrid: 76/114 procesadas
+2025-08-20 20:45:12,777 - INFO - 📈 Madrid: 81/114 procesadas
+2025-08-20 20:45:23,212 - INFO - 📈 Madrid: 86/114 procesadas
+2025-08-20 20:45:34,571 - INFO - 📈 Madrid: 91/114 procesadas
+2025-08-20 20:45:45,654 - INFO - 📈 Madrid: 96/114 procesadas
+2025-08-20 20:45:57,249 - INFO - 📈 Madrid: 101/114 procesadas
+2025-08-20 20:46:07,506 - INFO - 📈 Madrid: 106/114 procesadas
+2025-08-20 20:46:17,728 - INFO - 📈 Madrid: 111/114 procesadas
+2025-08-20 20:46:24,625 - INFO - ✅ Madrid completada: 114 propiedades extraídas
+2025-08-20 20:46:24,625 - INFO - 🎯 Total acumulado: 228 propiedades
+2025-08-20 20:46:24,627 - INFO - ⏳ Esperando 19s antes de Valencia...
+2025-08-20 20:46:43,386 - INFO - 🏙️  Iniciando scraping de Valencia (valencia)
+2025-08-20 20:46:45,336 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:46:51,517 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:46:57,421 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:47:02,440 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:47:07,453 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:47:12,987 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:47:18,629 - INFO - 🔗 Valencia: 17 enlaces encontrados
+2025-08-20 20:47:21,198 - INFO - 📊 Valencia: 113 propiedades únicas encontradas
+2025-08-20 20:47:23,098 - INFO - 📈 Valencia: 1/113 procesadas
+2025-08-20 20:47:33,749 - INFO - 📈 Valencia: 6/113 procesadas
+2025-08-20 20:47:45,102 - INFO - 📈 Valencia: 11/113 procesadas
+2025-08-20 20:47:54,513 - INFO - 📈 Valencia: 16/113 procesadas
+2025-08-20 20:48:06,194 - INFO - 📈 Valencia: 21/113 procesadas
+2025-08-20 20:48:16,886 - INFO - 📈 Valencia: 26/113 procesadas
+2025-08-20 20:48:28,005 - INFO - 📈 Valencia: 31/113 procesadas
+2025-08-20 20:48:39,947 - INFO - 📈 Valencia: 36/113 procesadas
+2025-08-20 20:48:51,600 - INFO - 📈 Valencia: 41/113 procesadas
+2025-08-20 20:49:02,830 - INFO - 📈 Valencia: 46/113 procesadas
+2025-08-20 20:49:13,671 - INFO - 📈 Valencia: 51/113 procesadas
+2025-08-20 20:49:25,822 - INFO - 📈 Valencia: 56/113 procesadas
+2025-08-20 20:49:35,683 - INFO - 📈 Valencia: 61/113 procesadas
+2025-08-20 20:49:46,271 - INFO - 📈 Valencia: 66/113 procesadas
+2025-08-20 20:49:57,666 - INFO - 📈 Valencia: 71/113 procesadas
+2025-08-20 20:50:09,299 - INFO - 📈 Valencia: 76/113 procesadas
+2025-08-20 20:50:21,334 - INFO - 📈 Valencia: 81/113 procesadas
+2025-08-20 20:50:30,321 - INFO - 📈 Valencia: 86/113 procesadas
+2025-08-20 20:50:41,574 - INFO - 📈 Valencia: 91/113 procesadas
+2025-08-20 20:50:53,443 - INFO - 📈 Valencia: 96/113 procesadas
+2025-08-20 20:51:05,398 - INFO - 📈 Valencia: 101/113 procesadas
+2025-08-20 20:51:18,098 - INFO - 📈 Valencia: 106/113 procesadas
+2025-08-20 20:51:28,426 - INFO - 📈 Valencia: 111/113 procesadas
+2025-08-20 20:51:32,026 - INFO - ✅ Valencia completada: 113 propiedades extraídas
+2025-08-20 20:51:32,027 - INFO - 🎯 Total acumulado: 341 propiedades
+2025-08-20 20:51:32,027 - INFO - 🎉 ¡Scraping multi-ciudad completado!
+2025-08-20 20:51:32,027 - INFO - 📊 Total final: 341 propiedades de 3 ciudades
+2025-08-20 20:51:32,066 - INFO - 💾 Datos guardados en: habitaclia_multicities_20250820_205132.csv
+2025-08-20 20:51:32,067 - INFO - 📊 341 propiedades de 3 ciudades
+2025-08-20 20:51:32,068 - INFO - 🏙️  Distribución por ciudad:
+2025-08-20 20:51:32,068 - INFO -    Barcelona: 114 propiedades
+2025-08-20 20:51:32,068 - INFO -    Madrid: 114 propiedades
+2025-08-20 20:51:32,068 - INFO -    Valencia: 113 propiedades
+2025-08-20 20:51:32,078 - INFO - 💾 Datos JSON guardados en: habitaclia_multicities_20250820_205132.json
